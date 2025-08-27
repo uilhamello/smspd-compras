@@ -1,9 +1,15 @@
+var fs = require("fs");
 // Banco de dados em memória (vai sumir ao reiniciar o servidor)
 const produtos = [];
 
 module.exports = {
   listar: (req, res) => {
-    res.json(produtos);
+    fs.readFile("./models/produtos.json" , "utf8", function(err, data){
+        if(err){
+            return console.log("Erro ao ler arquivo");
+        }        
+        res.json(JSON.parse(data)); // faz o parse para json
+    });
   },
 
   criar: (req, res) => {
