@@ -1,16 +1,5 @@
 {
-  "produtos": [
-    {
-      "id": 1,
-      "nome": "raquete",
-      "preco": 1.50,
-      "code": "789699553451515"
-    },
-    {
-      "id": 2,
-      "nome": "bola",
-      "preco": 3.20,
-      "code": "789699553451516"
-    }
-  ]
+  "nome": "Arroz",
+  "preço": 20.00,
+  "id": 1
 }

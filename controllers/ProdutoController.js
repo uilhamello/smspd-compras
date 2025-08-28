@@ -1,16 +1,18 @@
 var fs = require("fs");
-// Banco de dados em memória (vai sumir ao reiniciar o servidor)
-const produtos = [];
+
+const {produtos} = require("../models/produtos.json")
 
 module.exports = {
   listar: (req, res) => {
-    fs.readFile("./models/produtos.json" , "utf8", function(err, data){
-        if(err){
-            return console.log("Erro ao ler arquivo");
-        }        
-        res.json(JSON.parse(data)); // faz o parse para json
-    });
+    res.json(produtos);
+    },
+    buscarPorId: (req, res) => {  
+    const produto = produtos.find(p => p.id == req.params.id);
+    if (!produto) return res.status(404).json({ error: "Produto não encontrado " });
+    res.json(produto);  
+    console.log(produto);
   },
+ 
 
   criar: (req, res) => {
     const novoProduto = req.body;
@@ -19,11 +21,7 @@ module.exports = {
     res.status(201).json(novoProduto);
   },
 
-  buscarPorId: (req, res) => {
-    const produto = produtos.find(p => p.id == req.params.id);
-    if (!produto) return res.status(404).json({ error: "Produto não encontrado" });
-    res.json(produto);
-  },
+ 
 
   atualizar: (req, res) => {
     const produto = produtos.find(p => p.id == req.params.id);
